@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+    mysql: 
+        container_name: mysql
+        image: mysql
+        ports: 
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: sequelizedb
+            MYSQL_USER: wisnuuser
+            MYSQL_PASSWORD: wisnupass
+            MYSQL_ROOT_PASSWORD: wisnupass
+        volumes: 
+            - ./database:/var/lib/mysql
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin
+        hostname: pma
+        links:
+            - mysql:db
+        ports: 
+            - 8000:80
+        environment:
+            MYSQL_USER: wisnuuser
+            MYSQL_ROOT_PASSWORD: wisnupass
+            MYSQL_PASSWORD: wisnupass
